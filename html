@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <!-- Metadatos esenciales -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Simulador interactivo de perforación para minería con comparación de escenarios."
+    />
+    <meta
+      name="keywords"
+      content="simulador, perforación, minería, explosivos, ingeniería, comparación de escenarios"
+    />
+    <title>Simulador de Perforación con Comparación de Escenarios</title>
+
+    <!-- Metadatos adicionales para SEO y redes sociales -->
+    <meta
+      property="og:title"
+      content="Simulador de Perforación con Comparación de Escenarios"
+    />
+    <meta
+      property="og:description"
+      content="Interactúa con los parámetros de perforación, guarda y compara escenarios, y visualiza los resultados."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://tusitio.com" />
+    <meta property="og:image" content="https://tusitio.com/imagen.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Simulador de Perforación con Comparación de Escenarios"
+    />
+    <meta
+      name="twitter:description"
+      content="Interactúa con los parámetros de perforación, guarda y compara escenarios, y visualiza los resultados."
+    />
+    <meta name="twitter:image" content="https://tusitio.com/imagen.jpg" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+
+    <!-- Hojas de estilo -->
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- Preconexión para mejorar rendimiento -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  </head>
+  <body>
+    <header>
+      <h1>Simulador de Perforación</h1>
+      <p>
+        Interactúa con los parámetros de perforación, guarda y compara
+        escenarios, y visualiza los resultados.
+      </p>
+    </header>
+
+    <main>
+      <!-- Sección de controles -->
+      <section id="controls" class="controls-container">
+        <h2>Parámetros de Perforación</h2>
+        <form id="drillingParameters">
+          <fieldset>
+            <legend>Configuración</legend>
+
+            <div class="form-group">
+              <label for="tipoExplosivo">Tipo de Explosivo:</label>
+              <select
+                id="tipoExplosivo"
+                name="tipoExplosivo"
+                class="input-field"
+                aria-label="Seleccione el tipo de explosivo"
+                required
+              >
+                <option value="" disabled selected>
+                  Seleccione un explosivo
+                </option>
+                <option value="ANFO">ANFO</option>
+                <option value="Emulsión">Emulsión</option>
+                <option value="Gelatina">Gelatina</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="tipoRoca">Tipo de Roca:</label>
+              <select
+                id="tipoRoca"
+                name="tipoRoca"
+                class="input-field"
+                aria-label="Seleccione el tipo de roca"
+                required
+              >
+                <option value="" disabled selected>Seleccione una roca</option>
+                <option value="Blanda">Blanda</option>
+                <option value="Media">Media</option>
+                <option value="Dura">Dura</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="diametroTaladro">Diámetro del Taladro (mm):</label>
+              <input
+                type="number"
+                id="diametroTaladro"
+                name="diametroTaladro"
+                value="250"
+                class="input-field"
+                placeholder="Ej. 250"
+                aria-label="Ingrese el diámetro del taladro en milímetros"
+                min="1"
+                max="500"
+                step="1"
+                required
+              />
+            </div>
+          </fieldset>
+
+          <div class="button-group">
+            <button
+              type="submit"
+              id="visualizeButton"
+              class="button primary-button"
+              aria-label="Visualizar resultados"
+            >
+              Visualizar Resultados
+            </button>
+            <button
+              type="reset"
+              id="resetParams"
+              class="button secondary-button"
+              aria-label="Restablecer parámetros"
+            >
+              Restablecer Parámetros
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Sección de resultados -->
+      <section id="results" class="results-container">
+        <h2>Resultados</h2>
+        <fieldset>
+          <legend>Resultados de la Perforación</legend>
+          <dl class="result-list">
+            <div class="result-item">
+              <dt>Total de Explosivo:</dt>
+              <dd id="totalExplosive">0 kg</dd>
+            </div>
+            <div class="result-item">
+              <dt>Tiempo Total de Perforación:</dt>
+              <dd id="totalDrillingTime">0 h</dd>
+            </div>
+            <div class="result-item">
+              <dt>Toneladas Métricas Perforadas:</dt>
+              <dd id="toneladasPerforadas">0 t</dd>
+            </div>
+            <div class="result-item">
+              <dt>Burden:</dt>
+              <dd id="result-burden">0 m</dd>
+            </div>
+            <div class="result-item">
+              <dt>Espaciamiento:</dt>
+              <dd id="result-spacing">0 m</dd>
+            </div>
+            <div class="result-item">
+              <dt>Volumen por Pozo:</dt>
+              <dd id="result-volumenPozo">0 m³</dd>
+            </div>
+            <div class="result-item">
+              <dt>Cantidad de Explosivo por Pozo:</dt>
+              <dd id="result-explosivePerPozo">0 kg</dd>
+            </div>
+            <div class="result-item">
+              <dt>Número Total de Pozos:</dt>
+              <dd id="totalHoles">0</dd>
+            </div>
+          </dl>
+        </fieldset>
+
+        <fieldset>
+          <legend>Costos</legend>
+          <dl class="cost-list">
+            <div class="cost-item">
+              <dt>Costo de Perforación:</dt>
+              <dd id="result-costoPerforacion">$0.00</dd>
+            </div>
+            <div class="cost-item">
+              <dt>Costo del Explosivo:</dt>
+              <dd id="result-costoExplosivo">$0.00</dd>
+            </div>
+            <div class="cost-item">
+              <dt>Costo Total:</dt>
+              <dd id="result-costoTotal">$0.00</dd>
+            </div>
+          </dl>
+        </fieldset>
+
+        <button
+          id="exportCSV"
+          class="button secondary-button"
+          aria-label="Exportar resultados a Excel"
+        >
+          Exportar Resultados a Excel
+        </button>
+      </section>
+
+      <!-- Sección de escenarios guardados -->
+      <section id="scenarios" class="scenarios-container">
+        <h2>Escenarios Guardados</h2>
+        <div id="listaEscenarios" class="lista-escenarios">
+          <!-- Los escenarios se agregan dinámicamente aquí -->
+        </div>
+        <button
+          id="compareScenarios"
+          class="button primary-button"
+          aria-label="Comparar escenarios seleccionados"
+        >
+          Comparar Escenarios Seleccionados
+        </button>
+      </section>
+
+      <!-- Sección para comparación de escenarios -->
+      <section id="comparison" class="comparison-container">
+        <h2>Comparación de Escenarios</h2>
+        <table id="tablaComparacion" class="tabla-comparacion">
+          <!-- La tabla se llena dinámicamente -->
+        </table>
+      </section>
+
+      <!-- Sección para visualización 3D -->
+      <section
+        id="visualization"
+        class="visualization-container"
+        aria-label="Visualización 3D de la perforación"
+      >
+        <h2>Simulación 3D</h2>
+        <!-- El canvas se agregará mediante JavaScript -->
+      </section>
+
+      <!-- Instrucciones -->
+      <aside id="instructions" class="instructions-container">
+        <h2>Instrucciones</h2>
+        <p>
+          Ingrese los parámetros de perforación y pulse
+          <strong>"Visualizar Resultados"</strong> para ver los resultados.
+        </p>
+        <p>
+          Puede guardar diferentes escenarios y compararlos seleccionándolos en
+          la lista y pulsando
+          <strong>"Comparar Escenarios Seleccionados"</strong>.
+        </p>
+        <p>Los resultados se pueden exportar a Excel para su análisis.</p>
+      </aside>
+    </main>
+
+    <!-- Pie de página -->
+    <footer>
+      <p>
+        &copy; 2023 Simulador de Perforación. Todos los derechos reservados.
+      </p>
+    </footer>
+
+    <!-- Mensaje para el usuario -->
+    <div id="messageBox" class="message-box" style="display: none"></div>
+
+    <!-- Scripts -->
+    <!-- Carga diferida para mejorar rendimiento -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"
+      defer
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"
+      defer
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"
+      defer
+    ></script>
+    <!-- Tu script personalizado -->
+    <script src="script.js" defer></script>
+  </body>
+</html>
