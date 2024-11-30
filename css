@@ -1,0 +1,501 @@
+/* styles.css */
+
+/* ==================================================
+   1. Variables (Convertidas para compatibilidad)
+   ================================================== */
+
+:root {
+  --color-primario: #007bff;
+  --color-primario-hover: #0056b3;
+  --color-secundario: #6c757d;
+  --color-secundario-hover: #5a6268;
+  --color-fondo: #f8f9fa;
+  --color-texto: #212529;
+  --color-blanco: #ffffff;
+  --color-gris-claro: #e9ecef;
+  --color-gris-medio: #ced4da;
+  --color-gris-oscuro: #343a40;
+  --color-exito: #28a745;
+  --color-error: #dc3545;
+  --color-info: #17a2b8;
+
+  --fuente-principal: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+  --espaciado-xs: 0.25rem;
+  --espaciado-sm: 0.5rem;
+  --espaciado-md: 1rem;
+  --espaciado-lg: 1.5rem;
+  --espaciado-xl: 2rem;
+
+  --border-radius: 0.25rem;
+  --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* ==================================================
+     2. Reset y Estilos Base
+     ================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--fuente-principal);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--color-texto);
+  background-color: var(--color-fondo);
+}
+
+a {
+  color: var(--color-primario);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--color-primario-hover);
+  text-decoration: underline;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ==================================================
+     3. Layout y Estructura
+     ================================================== */
+
+header,
+footer {
+  background-color: var(--color-primario);
+  color: var(--color-blanco);
+  text-align: center;
+  padding: var(--espaciado-md);
+}
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: var(--espaciado-md);
+  gap: var(--espaciado-md);
+}
+
+section,
+aside {
+  background-color: var(--color-blanco);
+  padding: var(--espaciado-md);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  flex: 1 1 calc(50% - var(--espaciado-md));
+  max-width: calc(50% - var(--espaciado-md));
+}
+
+.visualization-container,
+.comparison-container {
+  flex: 1 1 100%;
+  max-width: 100%;
+}
+
+@media (max-width: 768px) {
+  main {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  section,
+  aside {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}
+
+/* ==================================================
+     4. Tipografía
+     ================================================== */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+  margin-bottom: var(--espaciado-sm);
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.75rem;
+}
+
+p {
+  margin-bottom: var(--espaciado-md);
+}
+
+/* ==================================================
+     5. Formularios
+     ================================================== */
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+fieldset {
+  margin-bottom: var(--espaciado-md);
+  border: 1px solid var(--color-gris-medio);
+  padding: var(--espaciado-md);
+  border-radius: var(--border-radius);
+}
+
+legend {
+  font-size: 1.25rem;
+  font-weight: 600;
+  padding: 0 var(--espaciado-sm);
+}
+
+.form-group {
+  margin-bottom: var(--espaciado-md);
+}
+
+label {
+  display: block;
+  margin-bottom: var(--espaciado-xs);
+  font-weight: 500;
+}
+
+.input-field,
+.select-field {
+  width: 100%;
+  padding: var(--espaciado-sm);
+  font-size: 1rem;
+  color: var(--color-texto);
+  background-color: var(--color-blanco);
+  border: 1px solid var(--color-gris-medio);
+  border-radius: var(--border-radius);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input-field:focus,
+.select-field:focus {
+  border-color: var(--color-primario);
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.button {
+  display: inline-block;
+  padding: var(--espaciado-sm) var(--espaciado-md);
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: center;
+  text-decoration: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.button.primary-button {
+  background-color: var(--color-primario);
+  border-color: var(--color-primario);
+  color: var(--color-blanco);
+}
+
+.button.primary-button:hover {
+  background-color: var(--color-primario-hover);
+  border-color: var(--color-primario-hover);
+}
+
+.button.secondary-button {
+  background-color: var(--color-secundario);
+  border-color: var(--color-secundario);
+  color: var(--color-blanco);
+}
+
+.button.secondary-button:hover {
+  background-color: var(--color-secundario-hover);
+  border-color: var(--color-secundario-hover);
+}
+
+.button:disabled {
+  background-color: var(--color-gris-medio);
+  border-color: var(--color-gris-medio);
+  cursor: not-allowed;
+}
+
+.button-group {
+  display: flex;
+  gap: var(--espaciado-sm);
+}
+
+/* ==================================================
+     6. Listas y Resultados
+     ================================================== */
+
+.result-list,
+.cost-list {
+  margin: var(--espaciado-md) 0;
+}
+
+.result-item,
+.cost-item {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--espaciado-xs) 0;
+  border-bottom: 1px solid var(--color-gris-claro);
+}
+
+.result-item:last-child,
+.cost-item:last-child {
+  border-bottom: none;
+}
+
+dt {
+  font-weight: 500;
+}
+
+dd {
+  margin-left: 0;
+}
+
+/* ==================================================
+     7. Escenarios Guardados y Comparación
+     ================================================== */
+
+.scenarios-container {
+  margin-top: var(--espaciado-md);
+}
+
+.lista-escenarios {
+  margin-bottom: var(--espaciado-md);
+}
+
+.scenario-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--espaciado-sm);
+}
+
+.scenario-checkbox {
+  margin-right: var(--espaciado-sm);
+}
+
+.comparison-container {
+  margin-top: var(--espaciado-md);
+}
+
+.tabla-comparacion {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: var(--espaciado-md);
+}
+
+.tabla-comparacion th,
+.tabla-comparacion td {
+  padding: var(--espaciado-sm);
+  border: 1px solid var(--color-gris-medio);
+  text-align: left;
+}
+
+.tabla-comparacion th {
+  background-color: var(--color-primario);
+  color: var(--color-blanco);
+}
+
+/* ==================================================
+     8. Visualización 3D
+     ================================================== */
+
+.visualization-container {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  margin-top: var(--espaciado-md);
+  border: 1px solid var(--color-gris-medio);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+/* ==================================================
+     9. Instrucciones
+     ================================================== */
+
+.instructions-container {
+  background-color: var(--color-gris-claro);
+  border: 1px solid var(--color-gris-medio);
+  border-radius: var(--border-radius);
+  padding: var(--espaciado-md);
+}
+
+.instructions-container h2 {
+  margin-bottom: var(--espaciado-sm);
+}
+
+.instructions-container p {
+  margin-bottom: var(--espaciado-sm);
+}
+
+/* ==================================================
+     10. Mensajes al Usuario
+     ================================================== */
+
+.message-box {
+  position: fixed;
+  bottom: var(--espaciado-md);
+  right: var(--espaciado-md);
+  padding: var(--espaciado-sm) var(--espaciado-md);
+  background-color: rgba(0, 0, 0, 0.75);
+  color: var(--color-blanco);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  z-index: 1000;
+  display: none;
+  max-width: 300px;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.message-box.success {
+  background-color: var(--color-exito);
+}
+
+.message-box.error {
+  background-color: var(--color-error);
+}
+
+.message-box.info {
+  background-color: var(--color-info);
+}
+
+/* ==================================================
+     11. Footer
+     ================================================== */
+
+footer {
+  background-color: var(--color-secundario);
+  color: var(--color-blanco);
+  text-align: center;
+  padding: var(--espaciado-md);
+}
+
+/* ==================================================
+     12. Modo Oscuro
+     ================================================== */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-fondo: #121212;
+    --color-texto: #e0e0e0;
+    --color-blanco: #1e1e1e;
+    --color-gris-claro: #343a40;
+    --color-gris-medio: #495057;
+    --color-gris-oscuro: #212529;
+    --box-shadow: none;
+  }
+
+  body {
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+  }
+
+  header,
+  footer {
+    background-color: var(--color-gris-oscuro);
+    color: var(--color-texto);
+  }
+
+  section,
+  aside {
+    background-color: var(--color-blanco);
+    color: var(--color-texto);
+    border: 1px solid var(--color-gris-medio);
+  }
+
+  .input-field,
+  .select-field {
+    background-color: var(--color-gris-claro);
+    color: var(--color-texto);
+    border: 1px solid var(--color-gris-medio);
+  }
+
+  .input-field:focus,
+  .select-field:focus {
+    border-color: var(--color-primario);
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+  }
+
+  .button.primary-button {
+    background-color: var(--color-primario);
+    border-color: var(--color-primario);
+    color: var(--color-blanco);
+  }
+
+  .button.primary-button:hover {
+    background-color: var(--color-primario-hover);
+    border-color: var(--color-primario-hover);
+  }
+
+  .button.secondary-button {
+    background-color: var(--color-secundario);
+    border-color: var(--color-secundario);
+    color: var(--color-blanco);
+  }
+
+  .button.secondary-button:hover {
+    background-color: var(--color-secundario-hover);
+    border-color: var(--color-secundario-hover);
+  }
+}
+
+/* ==================================================
+     13. Accesibilidad
+     ================================================== */
+
+:focus {
+  outline: 2px dashed var(--color-primario);
+  outline-offset: 2px;
+}
+
+/* ==================================================
+     14. Clases Utilitarias
+     ================================================== */
+
+.mt-1 {
+  margin-top: var(--espaciado-sm) !important;
+}
+
+.mb-1 {
+  margin-bottom: var(--espaciado-sm) !important;
+}
+
+.mt-2 {
+  margin-top: var(--espaciado-md) !important;
+}
+
+.mb-2 {
+  margin-bottom: var(--espaciado-md) !important;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ==================================================
+     Fin del Archivo
+     ================================================== */
